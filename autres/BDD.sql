@@ -36,15 +36,15 @@ CREATE TABLE Couleur(
 
 
 #------------------------------------------------------------
-# Table: Clefs
+# Table: Clef
 #------------------------------------------------------------
 
-CREATE TABLE Clefs(
+CREATE TABLE Clef(
         id  Int  Auto_increment  NOT NULL ,
-        nomCouleur Varchar (50) NOT NULL
-	,CONSTRAINT Clefs_PK PRIMARY KEY (id)
+        nom Varchar (50) NOT NULL
+	,CONSTRAINT Clef_PK PRIMARY KEY (id)
 
-	,CONSTRAINT Clefs_Couleur_FK FOREIGN KEY (nom) REFERENCES Couleur(nom)
+	,CONSTRAINT Clef_Couleur_FK FOREIGN KEY (nom) REFERENCES Couleur(nom)
 )ENGINE=InnoDB;
 
 
@@ -54,11 +54,12 @@ CREATE TABLE Clefs(
 
 CREATE TABLE Ouvre(
         id      Int NOT NULL ,
-        id_Cles Int NOT NULL ,
+        id_Clef Int NOT NULL ,
+        idCles  Int NOT NULL ,
         idSalle Int NOT NULL
-	,CONSTRAINT Ouvre_PK PRIMARY KEY (id,id_Cles)
+	,CONSTRAINT Ouvre_PK PRIMARY KEY (id,id_Clef)
 
 	,CONSTRAINT Ouvre_Ressource_FK FOREIGN KEY (id) REFERENCES Ressource(id)
-	,CONSTRAINT Ouvre_Cles0_FK FOREIGN KEY (id_Cles) REFERENCES Cles(id)
+	,CONSTRAINT Ouvre_Clef0_FK FOREIGN KEY (id_Clef) REFERENCES Clef(id)
 )ENGINE=InnoDB;
 
