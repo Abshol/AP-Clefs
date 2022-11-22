@@ -4,7 +4,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<VBox fx:id="Cles" alignment="CENTER" prefHeight="485.0" prefWidth="707.0" spacing="20.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.apcles.ClesController">
+<VBox fx:id="Clefs" alignment="CENTER" prefHeight="485.0" prefWidth="707.0" spacing="20.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.apcles.ClefsController">
     <padding>
         <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
     </padding>
@@ -12,7 +12,7 @@
       <children>
          <Label prefHeight="17.0" prefWidth="199.0" text="Connecté en tant que:" />
          <Label prefHeight="17.0" prefWidth="389.0" text=" " />
-         <Button minWidth="66.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="123.0" text="Déconnexion" />
+         <Button fx:id="deconnexion" minWidth="66.0" mnemonicParsing="false" onAction="#deconnexion" prefHeight="25.0" prefWidth="123.0" text="Déconnexion" />
       </children>
    </HBox>
    <HBox prefHeight="43.0" prefWidth="667.0">

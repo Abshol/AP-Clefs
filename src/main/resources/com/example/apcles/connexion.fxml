@@ -16,6 +16,6 @@
       </font></Label>
    <TextField fx:id="username" promptText="Nom d'utilisateur" />
    <PasswordField fx:id="password" promptText="Mot de passe" />
-    <Button onAction="#connexion" text="Se Connecter" />
+    <Button fx:id="connexion" onAction="#connexion" text="Se Connecter" />
    <Label fx:id="welcomeText" />
 </VBox>
