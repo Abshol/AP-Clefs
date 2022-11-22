@@ -22,11 +22,13 @@
       </children>
    </HBox>
    <ListView fx:id="listKey" prefHeight="200.0" prefWidth="200.0" />
-   <HBox prefHeight="75.0" prefWidth="667.0">
+   <HBox prefHeight="31.0" prefWidth="667.0">
       <children>
-         <Label prefHeight="17.0" prefWidth="502.0" text=" " />
-         <Button mnemonicParsing="false" text="Supprimer" />
+         <Label prefHeight="17.0" prefWidth="458.0" text=" " />
+         <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="98.0" text="Supprimer" />
          <Label prefHeight="17.0" prefWidth="14.0" text=" " />
-         <Button mnemonicParsing="false" text="Modifier" />
+         <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="98.0" text="Modifier" />
+         <Label prefHeight="17.0" prefWidth="14.0" text=" " />
+         <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="98.0" text="Ajouter" />
       </children></HBox>
 </VBox>
