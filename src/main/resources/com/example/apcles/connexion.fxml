@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<VBox fx:id="Connexion" alignment="CENTER" prefHeight="258.0" prefWidth="186.0" spacing="20.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.apcles.ConnexionController">
+    <padding>
+        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+    </padding>
+
+    <Label fx:id="Bienvenue" text="Bienvenue !">
+      <font>
+         <Font size="24.0" />
+      </font></Label>
+   <TextField fx:id="username" promptText="Nom d'utilisateur" />
+   <PasswordField fx:id="password" promptText="Mot de passe" />
+    <Button onAction="#connexion" text="Se Connecter" />
+   <Label fx:id="welcomeText" />
+</VBox>
