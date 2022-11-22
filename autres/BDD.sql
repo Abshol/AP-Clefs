@@ -36,15 +36,15 @@ CREATE TABLE Couleur(
 
 
 #------------------------------------------------------------
-# Table: Cles
+# Table: Clefs
 #------------------------------------------------------------
 
-CREATE TABLE Cles(
+CREATE TABLE Clefs(
         id  Int  Auto_increment  NOT NULL ,
-        nom Varchar (50) NOT NULL
-	,CONSTRAINT Cles_PK PRIMARY KEY (id)
+        nomCouleur Varchar (50) NOT NULL
+	,CONSTRAINT Clefs_PK PRIMARY KEY (id)
 
-	,CONSTRAINT Cles_Couleur_FK FOREIGN KEY (nom) REFERENCES Couleur(nom)
+	,CONSTRAINT Clefs_Couleur_FK FOREIGN KEY (nom) REFERENCES Couleur(nom)
 )ENGINE=InnoDB;
 
 
