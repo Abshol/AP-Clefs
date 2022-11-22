@@ -39,7 +39,7 @@ CREATE TABLE Couleur(
 # Table: Clef
 #------------------------------------------------------------
 
-CREATE TABLE Clef(
+CREATE TABLE Clef (
         id  Int  Auto_increment  NOT NULL ,
         nom Varchar (50) NOT NULL
 	,CONSTRAINT Clef_PK PRIMARY KEY (id)
