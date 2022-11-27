@@ -29,6 +29,6 @@
          <Label prefHeight="17.0" prefWidth="14.0" text=" " />
          <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="98.0" text="Modifier" />
          <Label prefHeight="17.0" prefWidth="14.0" text=" " />
-         <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="98.0" text="Ajouter" />
+         <Button fx:id="ajouter" mnemonicParsing="false" onAction="#goToAjouter" prefHeight="25.0" prefWidth="98.0" text="Ajouter" />
       </children></HBox>
 </VBox>
