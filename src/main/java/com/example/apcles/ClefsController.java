@@ -15,6 +15,8 @@ public class ClefsController {
     @FXML
     private Button ajouter;
     @FXML
+    private Button suprimer;
+    @FXML
     protected void deconnexion() throws IOException {
         Parent root = FXMLLoader.load(Start.class.getResource("connexion.fxml"));
         Stage scene = (Stage) deconnexion.getScene().getWindow();
@@ -29,6 +31,10 @@ public class ClefsController {
         scene.setTitle("Ajouter une clé");
         scene.setScene(new Scene(root));
         scene.centerOnScreen();
+    }
+    @FXML
+    protected void supprimer() throws IOException {
+
     }
 
 }
