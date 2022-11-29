@@ -25,43 +25,18 @@ public class AjouterController {
     private TextArea descClef;
     @FXML
     private void ajouter() {
-        try (Connection con = DriverManager.getConnection("jdcb:mysql:ap-clef//localhost:3306/", "root", "")){
+        try (Connection con = DriverManager.getConnection("jdcb:mysql://localhost:3306/ap-clef", "root", "")){
             ResultSet results;
 
             String sql = "INSERT INTO `clef`( `nom`, `ouvrir`, `nomCouleur`) VALUES (? , ?, ?)";
             PreparedStatement stmt = con.prepareStatement(sql);
             stmt.setString(1, nomClef.getText());
             stmt.setString(2, descClef.getText());
-            stmt.setString(3, couleurClef.getId());
+            stmt.setString(3, couleurClef.getValue().toString());
 
             stmt.executeUpdate();
         } catch (SQLException e){
             e.printStackTrace();
-        }
-
-        try (PreparedStatement updateSales = con.prepareStatement(updateString);
-             PreparedStatement updateTotal = con.prepareStatement(updateStatement)) {
-            con.setAutoCommit(false);
-            for (Map.Entry<String, Integer> e : salesForWeek.entrySet()) {
-                updateSales.setInt(1, e.getValue().intValue());
-                updateSales.setString(2, e.getKey());
-                updateSales.executeUpdate();
-
-                updateTotal.setInt(1, e.getValue().intValue());
-                updateTotal.setString(2, e.getKey());
-                updateTotal.executeUpdate();
-                con.commit();
-            }
-        } catch (SQLException e) {
-            JDBCTutorialUtilities.printSQLException(e);
-            if (con != null) {
-                try {
-                    System.err.print("Transaction is being rolled back");
-                    con.rollback();
-                } catch (SQLException excep) {
-                    JDBCTutorialUtilities.printSQLException(excep);
-                }
-            }
         }
     }
     @FXML

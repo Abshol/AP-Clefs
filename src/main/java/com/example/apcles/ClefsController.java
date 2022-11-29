@@ -30,4 +30,5 @@ public class ClefsController {
         scene.setScene(new Scene(root));
         scene.centerOnScreen();
     }
+
 }
