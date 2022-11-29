@@ -11,7 +11,7 @@
             <VBox prefHeight="90.0" prefWidth="318.0" />
             <VBox prefHeight="90.0" prefWidth="608.0">
                <children>
-                  <Label text="Nom de la clef" />
+                  <Label fx:id="labelNom" text="Nom de la clef" />
                   <TextField fx:id="nomClef" />
                   <Label text="Couleur" />
                   <ComboBox fx:id="couleurClef" prefWidth="150.0" />
@@ -38,9 +38,9 @@
                   <HBox prefHeight="100.0" prefWidth="200.0" />
                   <HBox prefHeight="100.0" prefWidth="200.0">
                      <children>
-                        <Button fx:id="annuler" mnemonicParsing="false" onAction="#annuler" prefHeight="25.0" prefWidth="78.0" text="Annuler" />
+                        <Button fx:id="ajouter" mnemonicParsing="false" onAction="#ajouter" prefHeight="25.0" prefWidth="73.0" text="Ajouter" />
                         <HBox prefHeight="55.0" prefWidth="34.0" />
-                        <Button fx:id="ajouter" mnemonicParsing="false" prefHeight="25.0" prefWidth="73.0" text="Ajouter" />
+                        <Button fx:id="annuler" mnemonicParsing="false" onAction="#annuler" prefHeight="25.0" prefWidth="78.0" text="Annuler" />
                      </children>
                   </HBox>
                </children>

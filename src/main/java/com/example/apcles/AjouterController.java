@@ -8,11 +8,10 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.stage.Stage;
+
+import javax.xml.transform.Result;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.*;
@@ -30,14 +29,26 @@ public class AjouterController implements Initializable {
     @FXML
     private TextArea descClef;
     @FXML
+    private Label labelNom;
+    @FXML
     private void ajouter() {
         try (Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/ap-clefs", "root", "")){
-            String sql = "INSERT INTO `clef`( `nom`, `ouvrir`, `nomCouleur`) VALUES (? , ?, ?)";
+            String sql = "SELECT * FROM `clef` WHERE clef.nom = ?";
             PreparedStatement stmt = con.prepareStatement(sql);
             stmt.setString(1, nomClef.getText());
-            stmt.setString(2, descClef.getText());
-            stmt.setString(3, couleurClef.getValue().toString());
-            stmt.executeUpdate();
+            ResultSet results = stmt.executeQuery();
+            if (results.next()){
+                labelNom.setText("Nom de la clef Erreur: Le nom de la clef est déjà enregistré");
+            }
+            else {
+                sql = "INSERT INTO `clef`( `nom`, `ouvrir`, `nomCouleur`) VALUES (? , ?, ?)";
+                stmt = con.prepareStatement(sql);
+                stmt.setString(1, nomClef.getText());
+                stmt.setString(2, descClef.getText());
+                stmt.setString(3, couleurClef.getValue().toString());
+                System.out.println(stmt);
+                stmt.executeUpdate();
+            }
         } catch (SQLException e){
             e.printStackTrace();
         }
@@ -57,11 +68,9 @@ public class AjouterController implements Initializable {
             String sql = "SELECT * FROM couleur";
             PreparedStatement stmt = con.prepareStatement(sql);
             results = stmt.executeQuery();
-            ObservableList<String> options = FXCollections.emptyObservableList();
             while (results.next()) {
-                options.add(results.getString(0));
+                couleurClef.getItems().add(results.getString("nom"));
             }
-            couleurClef.getItems().add(options);
         } catch (SQLException e){
             e.printStackTrace();
         }
