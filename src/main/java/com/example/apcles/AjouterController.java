@@ -7,7 +7,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
 import java.io.IOException;
-import java.sql.PreparedStatement;
+import java.sql.*;
 
 public class AjouterController {
     @FXML
@@ -17,10 +17,13 @@ public class AjouterController {
 
     @FXML
     private void ajouter() {
-        String updateString =
-                "update COFFEES set SALES = ? where COF_NAME = ?";
-        String updateStatement =
-                "update COFFEES set TOTAL = TOTAL + ? where COF_NAME = ?";
+        try (Connection con = DriverManager.getConnection("jdcb:mysql://localhost:3306/")){
+            ResultSet results;
+            String sql =
+        } catch (SQLException e){
+            e.printStackTrace();
+        }
+
         try (PreparedStatement updateSales = con.prepareStatement(updateString);
              PreparedStatement updateTotal = con.prepareStatement(updateStatement)) {
             con.setAutoCommit(false);
