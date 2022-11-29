@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le : mar. 29 nov. 2022 à 13:34
+-- Généré le : mar. 29 nov. 2022 à 13:42
 -- Version du serveur : 5.7.36
 -- Version de PHP : 7.4.26
 
@@ -35,6 +35,31 @@ CREATE TABLE IF NOT EXISTS `clef` (
   `nomCouleur` varchar(150) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `clef_couleur_FK` (`nomCouleur`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `comptes`
+--
+
+DROP TABLE IF EXISTS `comptes`;
+CREATE TABLE IF NOT EXISTS `comptes` (
+  `nomUtilisateur` varchar(150) NOT NULL,
+  `motDePasse` varchar(150) NOT NULL,
+  PRIMARY KEY (`nomUtilisateur`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `couleur`
+--
+
+DROP TABLE IF EXISTS `couleur`;
+CREATE TABLE IF NOT EXISTS `couleur` (
+  `nom` varchar(150) NOT NULL,
+  PRIMARY KEY (`nom`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --

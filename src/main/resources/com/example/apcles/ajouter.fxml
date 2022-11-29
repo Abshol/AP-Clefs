@@ -14,7 +14,7 @@
                   <Label text="Nom de la clef" />
                   <TextField fx:id="nomClef" />
                   <Label text="Couleur" />
-                  <ComboBox fx:id="clefCouleur" prefWidth="150.0" />
+                  <ComboBox fx:id="couleurClef" prefWidth="150.0" />
                </children>
             </VBox>
             <VBox prefHeight="90.0" prefWidth="318.0" />

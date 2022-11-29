@@ -25,13 +25,16 @@ public class AjouterController {
     private TextArea descClef;
     @FXML
     private void ajouter() {
-        try (Connection con = DriverManager.getConnection("jdcb:mysql://localhost:3306/", "root", "")){
+        try (Connection con = DriverManager.getConnection("jdcb:mysql:ap-clef//localhost:3306/", "root", "")){
             ResultSet results;
 
-            String sql = "INSERT INTO `clef`(`ouvrir`, `nom`) VALUES (? , ?)";
+            String sql = "INSERT INTO `clef`( `nom`, `ouvrir`, `nomCouleur`) VALUES (? , ?, ?)";
             PreparedStatement stmt = con.prepareStatement(sql);
             stmt.setString(1, nomClef.getText());
-            stmt.setString(2, )
+            stmt.setString(2, descClef.getText());
+            stmt.setString(3, couleurClef.getId());
+
+            stmt.executeUpdate();
         } catch (SQLException e){
             e.printStackTrace();
         }
