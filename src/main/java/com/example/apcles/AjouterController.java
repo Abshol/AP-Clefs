@@ -5,6 +5,9 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import java.io.IOException;
 import java.sql.*;
@@ -14,12 +17,21 @@ public class AjouterController {
     private Button ajouter;
     @FXML
     private Button annuler;
-
+    @FXML
+    private TextField nomClef;
+    @FXML
+    private ComboBox couleurClef;
+    @FXML
+    private TextArea descClef;
     @FXML
     private void ajouter() {
-        try (Connection con = DriverManager.getConnection("jdcb:mysql://localhost:3306/")){
+        try (Connection con = DriverManager.getConnection("jdcb:mysql://localhost:3306/", "root", "")){
             ResultSet results;
-            String sql =
+
+            String sql = "INSERT INTO `clef`(`ouvrir`, `nom`) VALUES (? , ?)";
+            PreparedStatement stmt = con.prepareStatement(sql);
+            stmt.setString(1, nomClef.getText());
+            stmt.setString(2, )
         } catch (SQLException e){
             e.printStackTrace();
         }

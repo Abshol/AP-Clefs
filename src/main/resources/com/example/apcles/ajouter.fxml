@@ -3,29 +3,36 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="339.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.apcles.AjouterController">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="330.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.apcles.AjouterController">
    <children>
-      <HBox prefHeight="100.0" prefWidth="200.0" />
-      <HBox prefHeight="100.0" prefWidth="200.0">
+      <HBox prefHeight="63.0" prefWidth="600.0" />
+      <HBox prefHeight="109.0" prefWidth="600.0">
          <children>
             <VBox prefHeight="90.0" prefWidth="318.0" />
             <VBox prefHeight="90.0" prefWidth="608.0">
                <children>
                   <Label text="Nom de la clef" />
-                  <TextField />
+                  <TextField fx:id="nomClef" />
                   <Label text="Couleur" />
-                  <ComboBox prefWidth="150.0" />
+                  <ComboBox fx:id="clefCouleur" prefWidth="150.0" />
                </children>
             </VBox>
             <VBox prefHeight="90.0" prefWidth="318.0" />
          </children></HBox>
       <HBox prefHeight="100.0" prefWidth="200.0">
          <children>
-            <ListView prefHeight="117.0" prefWidth="600.0" />
+            <VBox prefHeight="89.0" prefWidth="221.0" />
+            <VBox prefHeight="89.0" prefWidth="688.0">
+               <children>
+                  <Label text="Qu'ouvre-t-elle:" />
+                  <TextArea fx:id="descClef" prefHeight="200.0" prefWidth="200.0" />
+               </children>
+            </VBox>
+            <VBox prefHeight="89.0" prefWidth="221.0" />
          </children></HBox>
-      <HBox prefHeight="60.0" prefWidth="600.0">
+      <HBox prefHeight="39.0" prefWidth="600.0">
          <children>
-            <HBox prefHeight="49.0" prefWidth="436.0" />
+            <HBox prefHeight="1.0" prefWidth="436.0" />
             <VBox prefHeight="55.0" prefWidth="149.0">
                <children>
                   <HBox prefHeight="100.0" prefWidth="200.0" />
@@ -40,6 +47,6 @@
             </VBox>
          </children>
       </HBox>
-      <HBox prefHeight="38.0" prefWidth="600.0" />
+      <HBox prefHeight="44.0" prefWidth="600.0" />
    </children>
 </VBox>

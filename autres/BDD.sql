@@ -1,39 +1,53 @@
-#------------------------------------------------------------
-#        Script MySQL.
-#------------------------------------------------------------
+-- phpMyAdmin SQL Dump
+-- version 5.1.1
+-- https://www.phpmyadmin.net/
+--
+-- Hôte : 127.0.0.1:3306
+-- Généré le : mar. 29 nov. 2022 à 13:34
+-- Version du serveur : 5.7.36
+-- Version de PHP : 7.4.26
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+START TRANSACTION;
+SET time_zone = "+00:00";
 
 
-#------------------------------------------------------------
-# Table: comptes
-#------------------------------------------------------------
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
 
-CREATE TABLE comptes(
-        nomUtilisateur Varchar (150) NOT NULL ,
-        motDePasse     Varchar (150) NOT NULL
-	,CONSTRAINT comptes_PK PRIMARY KEY (nomUtilisateur)
-)ENGINE=InnoDB;
+--
+-- Base de données : `ap-clefs`
+--
 
+-- --------------------------------------------------------
 
-#------------------------------------------------------------
-# Table: couleur
-#------------------------------------------------------------
+--
+-- Structure de la table `clef`
+--
 
-CREATE TABLE couleur(
-        nom Varchar (150) NOT NULL
-	,CONSTRAINT couleur_PK PRIMARY KEY (nom)
-)ENGINE=InnoDB;
+DROP TABLE IF EXISTS `clef`;
+CREATE TABLE IF NOT EXISTS `clef` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `nom` varchar(150) NOT NULL,
+  `ouvrir` longtext NOT NULL,
+  `nomCouleur` varchar(150) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `clef_couleur_FK` (`nomCouleur`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Contraintes pour les tables déchargées
+--
 
-#------------------------------------------------------------
-# Table: clef
-#------------------------------------------------------------
+--
+-- Contraintes pour la table `clef`
+--
+ALTER TABLE `clef`
+  ADD CONSTRAINT `clef_couleur_FK` FOREIGN KEY (`nomCouleur`) REFERENCES `couleur` (`nom`);
+COMMIT;
 
-CREATE TABLE clef(
-        id     Int  Auto_increment  NOT NULL ,
-        ouvrir Longtext NOT NULL ,
-        nom    Varchar (150) NOT NULL
-	,CONSTRAINT clef_PK PRIMARY KEY (id)
-
-	,CONSTRAINT clef_couleur_FK FOREIGN KEY (nom) REFERENCES couleur(nom)
-)ENGINE=InnoDB;
-
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
