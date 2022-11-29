@@ -4,16 +4,21 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
+import javafx.scene.control.*;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.sql.*;
 
 public class ClefsController {
     @FXML
     private Button deconnexion;
     @FXML
     private Button ajouter;
+    @FXML
+    private Button supprimer;
+    @FXML
+    private ListView listKey;
     @FXML
     protected void deconnexion() throws IOException {
         Parent root = FXMLLoader.load(Start.class.getResource("connexion.fxml"));
@@ -29,6 +34,28 @@ public class ClefsController {
         scene.setTitle("Ajouter une clé");
         scene.setScene(new Scene(root));
         scene.centerOnScreen();
+    }
+    @FXML
+    protected void supprimer() throws IOException {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Current project is modified");
+        alert.setContentText("Save?");
+        ButtonType okButton = new ButtonType("Oui", ButtonBar.ButtonData.YES);
+        ButtonType noButton = new ButtonType("Non", ButtonBar.ButtonData.NO);
+        alert.getButtonTypes().setAll(okButton, noButton);
+        alert.showAndWait().ifPresent(type -> {
+            if (type == ButtonType.OK) {
+                try (Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/ap-clefs", "root", "")) {
+                    String sql = "DELETE FROM `clef` WHERE clef.id = ?";
+                    PreparedStatement stmt = con.prepareStatement(sql);
+                    //stmt.setString(1, listKey.select);
+                    ResultSet results = stmt.executeQuery();
+                } catch (SQLException e) {
+                    throw new RuntimeException(e);
+                }
+
+            }
+        });
     }
 
 }
