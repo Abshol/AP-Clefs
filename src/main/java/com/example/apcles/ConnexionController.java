@@ -11,7 +11,6 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.scene.paint.Paint;
 import javafx.stage.Stage;
-
 import java.io.IOException;
 import java.sql.*;
 
@@ -26,19 +25,28 @@ public class ConnexionController {
     private Button connexion;
     @FXML
     protected void connexion() throws IOException {
-
-        if (username.getText().equals("admin") && password.getText().equals("motdepasse")) {
-            welcomeText.setTextFill(Paint.valueOf("green"));
-            welcomeText.setText("Vous êtes connectés");
-            Parent root = FXMLLoader.load(Start.class.getResource("clefs.fxml"));
-            Stage scene = (Stage) connexion.getScene().getWindow();
-            scene.setTitle("gestionnaire de clefs");
-            scene.setScene(new Scene(root));
-            scene.centerOnScreen();
-        }
-        else {
-            welcomeText.setTextFill(Paint.valueOf("red"));
-            welcomeText.setText("Le nom d'utilisateur ou le mot de passe rentré n'est pas correcte.");
+        try (Connection con = DriverManager.getConnection("jdbc:mysql://localhost/ap-clefs", "root", "")){
+            ResultSet results;
+            String sql = "SELECT COUNT(*) FROM comptes WHERE nomUtilisateur = ? and motDePasse = ?";
+            PreparedStatement stmt = con.prepareStatement(sql);
+            stmt.setString(1, username.getText());
+            stmt.setString(2, password.getText());
+            results = stmt.executeQuery();
+            while (results.next()){
+                if (results.getInt(0) > 0){
+                    Parent root = FXMLLoader.load(Start.class.getResource("clefs.fxml"));
+                    Stage scene = (Stage) connexion.getScene().getWindow();
+                    scene.setTitle("gestionnaire de clefs");
+                    scene.setScene(new Scene(root));
+                    scene.centerOnScreen();
+                }
+                else {
+                    welcomeText.setTextFill(Paint.valueOf("red"));
+                    welcomeText.setText("Le nom d'utilisateur ou le mot de passe rentré n'est pas correcte.");
+                }
+            }
+        } catch (SQLException e){
+            e.printStackTrace();
         }
         try (Connection con = DriverManager.getConnection("jdcb:mysql:ap-clefs//localhost:3306/", "root", "")){
             ListView<clef> listView = new ListView<>();
