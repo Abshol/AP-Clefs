@@ -20,6 +20,8 @@ public class ClefsController {
     @FXML
     private ListView listKey;
     @FXML
+    private Button modifier;
+    @FXML
     protected void deconnexion() throws IOException {
         Parent root = FXMLLoader.load(Start.class.getResource("connexion.fxml"));
         Stage scene = (Stage) deconnexion.getScene().getWindow();
@@ -56,6 +58,15 @@ public class ClefsController {
 
             }
         });
+    }
+
+    @FXML
+    protected void goToModifier() throws IOException {
+        Parent root = FXMLLoader.load(Start.class.getResource("modifier.fxml"));
+        Stage scene = (Stage) modifier.getScene().getWindow();
+        scene.setTitle("Modifier une clé");
+        scene.setScene(new Scene(root));
+        scene.centerOnScreen();
     }
 
 }
