@@ -25,7 +25,7 @@
    <HBox prefHeight="31.0" prefWidth="667.0">
       <children>
          <Label prefHeight="17.0" prefWidth="458.0" text=" " />
-         <Button fx:id="supprimer" mnemonicParsing="false" onAction="#Supprimer" prefHeight="25.0" prefWidth="98.0" text="Supprimer" />
+         <Button fx:id="supprimer" mnemonicParsing="false" onAction="#supprimer" prefHeight="25.0" prefWidth="98.0" text="Supprimer" />
          <Label prefHeight="17.0" prefWidth="14.0" text=" " />
          <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="98.0" text="Modifier" />
          <Label prefHeight="17.0" prefWidth="14.0" text=" " />

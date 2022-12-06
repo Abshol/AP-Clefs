@@ -33,7 +33,7 @@ public class ConnexionController {
             stmt.setString(2, password.getText());
             results = stmt.executeQuery();
             while (results.next()){
-                if (results.getInt(0) > 0){
+                if (results.getInt(1) > 0){
                     Parent root = FXMLLoader.load(Start.class.getResource("clefs.fxml"));
                     Stage scene = (Stage) connexion.getScene().getWindow();
                     scene.setTitle("gestionnaire de clefs");
@@ -48,7 +48,7 @@ public class ConnexionController {
         } catch (SQLException e){
             e.printStackTrace();
         }
-        try (Connection con = DriverManager.getConnection("jdcb:mysql:ap-clefs//localhost:3306/", "root", "")){
+        try (Connection con = DriverManager.getConnection("jdbc:mysql:ap-clefs//localhost:3306/", "root", "")){
             ListView<clef> listView = new ListView<>();
             ResultSet results;
 
