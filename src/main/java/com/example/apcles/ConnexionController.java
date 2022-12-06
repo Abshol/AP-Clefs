@@ -71,11 +71,6 @@ public class ConnexionController {
             e.printStackTrace();
         }
 
-        this.items.forEach(System.out::println);
-        System.out.println();
-
-
-
         this.tableKey.setItems(this.items);
 
     }

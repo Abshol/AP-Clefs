@@ -23,10 +23,10 @@
    </HBox>
    <TableView fx:id="tableKey" prefHeight="200.0" prefWidth="200.0">
      <columns>
-       <TableColumn prefWidth="75.0" text="ID" />
-       <TableColumn prefWidth="150.33336639404297" text="Nom" />
-         <TableColumn minWidth="0.33331298828125" prefWidth="326.99998474121094" text="Ouvre" />
-         <TableColumn minWidth="6.666748046875" prefWidth="113.0" text="nomCouleur" />
+       <TableColumn fx:id="id" prefWidth="75.0" text="ID" />
+       <TableColumn fx:id="nom" prefWidth="150.33336639404297" text="Nom" />
+         <TableColumn fx:id="ouvrir" minWidth="0.33331298828125" prefWidth="326.99998474121094" text="Ouvre" />
+         <TableColumn fx:id="nomCouleur" minWidth="6.666748046875" prefWidth="113.0" text="nomCouleur" />
      </columns>
    </TableView>
    <HBox prefHeight="31.0" prefWidth="667.0">
