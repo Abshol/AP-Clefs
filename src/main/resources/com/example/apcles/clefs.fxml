@@ -21,7 +21,14 @@
          <Button minWidth="66.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="237.0" text="Rechercher" />
       </children>
    </HBox>
-   <ListView fx:id="listKey" prefHeight="200.0" prefWidth="200.0" />
+   <TableView fx:id="tableKey" prefHeight="200.0" prefWidth="200.0">
+     <columns>
+       <TableColumn prefWidth="75.0" text="ID" />
+       <TableColumn prefWidth="150.33336639404297" text="Nom" />
+         <TableColumn minWidth="0.33331298828125" prefWidth="326.99998474121094" text="Ouvre" />
+         <TableColumn minWidth="6.666748046875" prefWidth="113.0" text="nomCouleur" />
+     </columns>
+   </TableView>
    <HBox prefHeight="31.0" prefWidth="667.0">
       <children>
          <Label prefHeight="17.0" prefWidth="458.0" text=" " />

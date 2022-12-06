@@ -18,7 +18,7 @@ public class ClefsController {
     @FXML
     private Button supprimer;
     @FXML
-    private ListView listKey;
+    private TableView tableKey;
     @FXML
     private Button modifier;
     @FXML
@@ -40,8 +40,8 @@ public class ClefsController {
     @FXML
     protected void supprimer() throws IOException {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-        alert.setTitle("Current project is modified");
-        alert.setContentText("Save?");
+        alert.setTitle("Supprimer la clef");
+        alert.setContentText("Êtes-vous sur ?");
         ButtonType okButton = new ButtonType("Oui", ButtonBar.ButtonData.YES);
         ButtonType noButton = new ButtonType("Non", ButtonBar.ButtonData.NO);
         alert.getButtonTypes().setAll(okButton, noButton);

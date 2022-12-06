@@ -7,10 +7,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.ListView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.paint.Paint;
 import javafx.stage.Stage;
 
@@ -27,7 +24,9 @@ public class ConnexionController {
     @FXML
     private Button connexion;
     @FXML
-    private ListView<clef> listKey =  new ListView<>();
+    private ObservableList<clef> items = FXCollections.observableArrayList();
+    @FXML
+    private TableView<clef> tableKey =  new TableView<>();
     @FXML
     protected void connexion() throws IOException {
         if (username.getText().equals("admin") && password.getText().equals("motdepasse")) {
@@ -44,7 +43,7 @@ public class ConnexionController {
             welcomeText.setText("Le nom d'utilisateur ou le mot de passe rentré n'est pas correcte.");
         }
         try (Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/ap-clefs", "root", "")){
-            ObservableList<clef> items = FXCollections.observableArrayList();
+
             ResultSet results;
 
             String sql = "SELECT * FROM clef";
@@ -58,11 +57,14 @@ public class ConnexionController {
                 clef clef = new clef(id, nom, ouvrir, nomCouleur);
                 items.add(clef);
             }
-            listKey.setItems(items);
-            listKey.refresh();
         } catch (SQLException e){
             e.printStackTrace();
         }
+
+        this.items.forEach(System.out::println);
+        System.out.println();
+
+        this.tableKey.setItems(this.items);
 
     }
 }

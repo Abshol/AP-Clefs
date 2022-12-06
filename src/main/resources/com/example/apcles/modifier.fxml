@@ -1,14 +1,43 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="com.example.apcles.Modifier"
-            prefHeight="400.0" prefWidth="600.0">
-
-</AnchorPane>
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <HBox prefHeight="65.0" prefWidth="600.0" />
+      <HBox prefHeight="187.0" prefWidth="600.0">
+         <children>
+            <Pane prefHeight="184.0" prefWidth="70.0" />
+            <TableView prefHeight="184.0" prefWidth="562.0">
+              <columns>
+                <TableColumn prefWidth="75.0" text="ID" />
+                <TableColumn prefWidth="76.33330535888672" text="Nom" />
+                  <TableColumn prefWidth="259.00001525878906" text="Ouvre" />
+                  <TableColumn prefWidth="116.66659545898438" text="nomCouleur" />
+              </columns>
+            </TableView>
+            <Pane layoutX="10.0" layoutY="10.0" prefHeight="184.0" prefWidth="70.0" />
+         </children></HBox>
+      <HBox prefHeight="43.0" prefWidth="600.0" />
+      <HBox prefHeight="117.0" prefWidth="600.0">
+         <children>
+            <Pane prefHeight="114.0" prefWidth="36.0" />
+            <VBox prefHeight="114.0" prefWidth="191.0">
+               <children>
+                  <Label text="Nom de la clef" />
+                  <TextField prefHeight="25.0" prefWidth="145.0" />
+                  <Label text="Couleur" />
+                  <ComboBox prefWidth="150.0" />
+               </children>
+            </VBox>
+            <Pane prefHeight="114.0" prefWidth="112.0" />
+            <VBox prefHeight="114.0" prefWidth="227.0">
+               <children>
+                  <Label text="Qu'ouvre-t-elle ?" />
+                  <TextArea prefHeight="72.0" prefWidth="227.0" />
+               </children>
+            </VBox>
+         </children></HBox>
+   </children>
+</VBox>
