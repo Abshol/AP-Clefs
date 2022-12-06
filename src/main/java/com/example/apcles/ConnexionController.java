@@ -11,6 +11,7 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.scene.paint.Paint;
 import javafx.stage.Stage;
+
 import java.io.IOException;
 import java.sql.*;
 
@@ -23,6 +24,8 @@ public class ConnexionController {
     private TextField username;
     @FXML
     private Button connexion;
+    @FXML
+    private ListView<clef> listKey =  new ListView<>();
     @FXML
     protected void connexion() throws IOException {
         try (Connection con = DriverManager.getConnection("jdbc:mysql://localhost/ap-clefs", "root", "")){
@@ -48,23 +51,26 @@ public class ConnexionController {
         } catch (SQLException e){
             e.printStackTrace();
         }
-        try (Connection con = DriverManager.getConnection("jdbc:mysql:ap-clefs//localhost:3306/", "root", "")){
-            ListView<clef> listView = new ListView<>();
+        try (Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/ap-clefs", "root", "")){
+            ObservableList<clef> items = FXCollections.observableArrayList();
             ResultSet results;
 
             String sql = "SELECT * FROM clef";
             PreparedStatement stmt = con.prepareStatement(sql);
             results = stmt.executeQuery();
             while (results.next()){
-                int id = results.getInt(0);
-                String nom = results.getString(1);
-                String ouvrir = results.getString(2);
-                String nomCouleur = results.getString(3);
+                int id = results.getInt(1);
+                String nom = results.getString(2);
+                String ouvrir = results.getString(3);
+                String nomCouleur = results.getString(4);
                 clef clef = new clef(id, nom, ouvrir, nomCouleur);
-                listView.getItems().add(clef);
+                items.add(clef);
             }
+            listKey.setItems(items);
+            listKey.refresh();
         } catch (SQLException e){
             e.printStackTrace();
         }
+
     }
 }
