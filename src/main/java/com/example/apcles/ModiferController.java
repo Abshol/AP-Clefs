@@ -33,6 +33,7 @@ public class ModiferController {
         scene.setScene(new Scene(root));
         scene.centerOnScreen();
     }
+    @FXML
     protected void modifier() throws IOException {
         try (Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/ap-clefs", "root", "")){
 
