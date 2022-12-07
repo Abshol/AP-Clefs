@@ -99,11 +99,11 @@ public class ClefsController {
         ButtonType noButton = new ButtonType("Non", ButtonBar.ButtonData.NO);
         alert.getButtonTypes().setAll(okButton, noButton);
         alert.showAndWait().ifPresent(type -> {
-            if (type == ButtonType.OK) {
+            if (type == ButtonType.YES) {
                 try (Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/ap-clefs", "root", "")) {
                     String sql = "DELETE FROM `clef` WHERE clef.id = ?";
                     PreparedStatement stmt = con.prepareStatement(sql);
-                    //stmt.setString(1, listKey.select);
+                    stmt.setInt(1, tableKey.getSelectionModel().getSelectedItem().getId());
                     ResultSet results = stmt.executeQuery();
                 } catch (SQLException e) {
                     throw new RuntimeException(e);

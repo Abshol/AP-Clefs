@@ -31,7 +31,7 @@ public class AjouterController implements Initializable {
     @FXML
     private Label labelNom;
     @FXML
-    private void ajouter() {
+    private void ajouter() throws IOException {
         try (Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/ap-clefs", "root", "")){
             String sql = "SELECT * FROM `clef` WHERE clef.nom = ?";
             PreparedStatement stmt = con.prepareStatement(sql);
@@ -48,6 +48,7 @@ public class AjouterController implements Initializable {
                 stmt.setString(3, couleurClef.getValue().toString());
                 System.out.println(stmt);
                 stmt.executeUpdate();
+                annuler();
             }
         } catch (SQLException e){
             e.printStackTrace();
