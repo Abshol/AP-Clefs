@@ -36,7 +36,7 @@ public class ConnexionController {
             stmt.setString(1, username.getText());
             results = stmt.executeQuery();
             while (results.next()){
-                if (hash.verify(results.getString(1),password.getText())){
+                if (hash.verify(password.getText(), results.getString(1))){
                     Parent root = FXMLLoader.load(Start.class.getResource("clefs.fxml"));
                     Stage scene = (Stage) connexion.getScene().getWindow();
                     scene.setTitle("gestionnaire de clefs");

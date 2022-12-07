@@ -53,7 +53,6 @@ public class passwordHash {
     public Boolean verify(String password, String hash) {
         System.out.println(password);
         System.out.println(hash);
-        System.out.println(argon2.verify(hash, password));
-        return true;
+        return argon2.verify(hash, password);
     }
 }
