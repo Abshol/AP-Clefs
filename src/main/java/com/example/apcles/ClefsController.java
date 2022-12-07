@@ -6,13 +6,12 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
+import Class.clef;
 
 import java.io.IOException;
 import java.sql.*;
 
 public class ClefsController {
-    @FXML
-    public ListView listKey;
     @FXML
     private Button deconnexion;
     @FXML
@@ -20,7 +19,7 @@ public class ClefsController {
     @FXML
     private Button supprimer;
     @FXML
-    private TableView tableKey;
+    private TableView<clef> tableKey;
     @FXML
     private Button modifier;
     @FXML
@@ -54,7 +53,7 @@ public class ClefsController {
                 try (Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/ap-clefs", "root", "")) {
                     String sql = "DELETE FROM `clef` WHERE clef.id = ?";
                     PreparedStatement stmt = con.prepareStatement(sql);
-                    //stmt.setString(1, listKey.select);
+                    stmt.setInt(1, tableKey.getSelectionModel().getSelectedItem().getId());
                     ResultSet results = stmt.executeQuery();
                 } catch (SQLException e) {
                     throw new RuntimeException(e);
