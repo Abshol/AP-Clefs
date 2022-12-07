@@ -4,11 +4,9 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.stage.Stage;
+import Class.clef;
 
 import java.io.IOException;
 import java.sql.Connection;
@@ -26,6 +24,8 @@ public class ModiferController {
     @FXML
     private TextArea ouvrir;
     @FXML
+    private TableView<clef> tableKey;
+    @FXML
     protected void retour() throws IOException {
         Parent root = FXMLLoader.load(Start.class.getResource("clefs.fxml"));
         Stage scene = (Stage) annuler.getScene().getWindow();
@@ -42,7 +42,7 @@ public class ModiferController {
             stmt.setString(1, nom.getText());
             stmt.setString(2, ouvrir.getText());
             stmt.setString(3, (String) couleur.getValue());
-            //stmt.setInt(4, cible id);
+            stmt.setInt(4, tableKey.getSelectionModel().getSelectedItem().getId());
             stmt.execute();
         } catch (SQLException e){
             e.printStackTrace();
