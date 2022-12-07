@@ -18,7 +18,7 @@
    <HBox prefHeight="43.0" prefWidth="667.0">
       <children>
          <TextField fx:id="searchBar" maxWidth="-Infinity" prefHeight="28.0" prefWidth="688.0" />
-         <Button fx:id="searchButton" minWidth="66.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="237.0" text="Rechercher" />
+         <Button fx:id="searchButton" minWidth="66.0" mnemonicParsing="false" onAction="#search" prefHeight="25.0" prefWidth="237.0" text="Rechercher" />
       </children>
    </HBox>
    <TableView fx:id="tableKey" prefHeight="200.0" prefWidth="200.0">
