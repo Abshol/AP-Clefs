@@ -91,7 +91,7 @@ public class ModiferController {
             stmt.setString(1, nom.getText());
             stmt.setString(2, ouvrir.getText());
             stmt.setString(3, couleur.getValue().toString());
-            //stmt.setInt(4, tableKey.getSelectionModel().getSelectedItem().getId());
+            stmt.setInt(4, tableKey.getSelectionModel().getSelectedItem().getId());
             if (stmt.execute()) {
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
                 alert.setTitle("Succès !");
