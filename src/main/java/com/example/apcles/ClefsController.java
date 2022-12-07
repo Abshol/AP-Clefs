@@ -1,12 +1,14 @@
 package com.example.apcles;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
-
+import Class.clef;
 import java.io.IOException;
 import java.sql.*;
 
@@ -22,9 +24,33 @@ public class ClefsController {
     @FXML
     private TableView tableKey;
     @FXML
+    private ObservableList<clef> items = FXCollections.observableArrayList();
+    @FXML
     private Button modifier;
     @FXML
     private Button suprimer;
+    @FXML
+    protected void initialize() {
+        try (Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/ap-clefs", "root", "")){
+
+            ResultSet results;
+
+            String sql = "SELECT * FROM clef";
+            PreparedStatement stmt = con.prepareStatement(sql);
+            results = stmt.executeQuery();
+            while (results.next()){
+                int id = results.getInt(1);
+                String nom = results.getString(2);
+                String ouvrir = results.getString(3);
+                String nomCouleur = results.getString(4);
+                clef clef = new clef(id, nom, ouvrir, nomCouleur);
+                items.add(clef);
+            }
+        } catch (SQLException e){
+            e.printStackTrace();
+        }
+        tableKey.setItems(items);
+    }
     @FXML
     protected void deconnexion() throws IOException {
         Parent root = FXMLLoader.load(Start.class.getResource("connexion.fxml"));
@@ -72,5 +98,4 @@ public class ClefsController {
         scene.setScene(new Scene(root));
         scene.centerOnScreen();
     }
-
 }

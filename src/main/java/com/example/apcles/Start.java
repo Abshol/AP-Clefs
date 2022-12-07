@@ -16,9 +16,11 @@ public class Start extends Application {
         stage.setTitle("Connexion");
         stage.setScene(scene);
         stage.show();
-
+        /*
+        --------------- Uncomment this if you don't have the hashed password in your database --------------------
         passwordHash hash = new passwordHash();
         hash.hash("motdepasse", "admin");
+         */
     }
 
     public static void main(String[] args) {

@@ -12,6 +12,7 @@ import javafx.stage.Stage;
 import Class.clef;
 import java.io.IOException;
 import java.sql.*;
+import Class.passwordHash;
 
 public class ConnexionController {
     @FXML
@@ -23,20 +24,19 @@ public class ConnexionController {
     @FXML
     private Button connexion;
     @FXML
-    private ObservableList<clef> items = FXCollections.observableArrayList();
-    @FXML
     private TableView<clef> tableKey =  new TableView<>();
     @FXML
     protected void connexion() throws IOException {
+
         try (Connection con = DriverManager.getConnection("jdbc:mysql://localhost/ap-clefs", "root", "")){
+            passwordHash hash = new passwordHash();
             ResultSet results;
-            String sql = "SELECT COUNT(*) FROM comptes WHERE nomUtilisateur = ? and motDePasse = ?";
+            String sql = "SELECT motDePasse FROM comptes WHERE nomUtilisateur = ?";
             PreparedStatement stmt = con.prepareStatement(sql);
             stmt.setString(1, username.getText());
-            stmt.setString(2, password.getText());
             results = stmt.executeQuery();
             while (results.next()){
-                if (results.getInt(1) > 0){
+                if (hash.verify(results.getString(1),password.getText())){
                     Parent root = FXMLLoader.load(Start.class.getResource("clefs.fxml"));
                     Stage scene = (Stage) connexion.getScene().getWindow();
                     scene.setTitle("gestionnaire de clefs");
@@ -51,26 +51,5 @@ public class ConnexionController {
         } catch (SQLException e){
             e.printStackTrace();
         }
-        try (Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/ap-clefs", "root", "")){
-
-            ResultSet results;
-
-            String sql = "SELECT * FROM clef";
-            PreparedStatement stmt = con.prepareStatement(sql);
-            results = stmt.executeQuery();
-            while (results.next()){
-                int id = results.getInt(1);
-                String nom = results.getString(2);
-                String ouvrir = results.getString(3);
-                String nomCouleur = results.getString(4);
-                clef clef = new clef(id, nom, ouvrir, nomCouleur);
-                items.add(clef);
-            }
-        } catch (SQLException e){
-            e.printStackTrace();
-        }
-
-        this.tableKey.setItems(this.items);
-
     }
 }

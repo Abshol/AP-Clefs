@@ -8,6 +8,10 @@ import java.sql.*;
 
 public class passwordHash {
 
+    private Argon2 argon2 = Argon2Factory.create(
+            Argon2Factory.Argon2Types.ARGON2id,
+            16,
+            32);
     public passwordHash() {
     }
 
@@ -17,10 +21,6 @@ public class passwordHash {
     public void hash(String password, String username) {
         // salt 32 bytes
         // Hash length 64 bytes
-        Argon2 argon2 = Argon2Factory.create(
-                Argon2Factory.Argon2Types.ARGON2id,
-                16,
-                32);
         String hash = argon2.hash(3, // Number of iterations
                 64 * 1024, // 64mb
                 1, // how many parallel threads to use
@@ -33,14 +33,27 @@ public class passwordHash {
             stmt.setString(1, username);
             stmt.setString(2, hash);
             stmt.execute();
-        } catch (SQLException e){
+        } catch (SQLException e) {
             e.printStackTrace();
         }
-
-        System.out.println("Hash + salt of the password: " + hash);
-        System.out.println("Password verification success: " + argon2.verify(hash, password));
+    }
+    /*
+    returns a password's hash
+     */
+    public String getHash(String password) {
+        return argon2.hash(3, // Number of iterations
+                64 * 1024, // 64mb
+                1, // how many parallel threads to use
+                password);
     }
 
-
-
+    /*
+    returns if the two passwords are the same or not
+     */
+    public Boolean verify(String password, String hash) {
+        System.out.println(password);
+        System.out.println(hash);
+        System.out.println(argon2.verify(hash, password));
+        return true;
+    }
 }
