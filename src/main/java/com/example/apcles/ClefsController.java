@@ -19,6 +19,8 @@ public class ClefsController {
     @FXML
     public ListView listKey;
     @FXML
+    public Button refresh;
+    @FXML
     private Button deconnexion;
     @FXML
     private Button ajouter;
@@ -118,7 +120,10 @@ public class ClefsController {
         scene.setScene(new Scene(root));
         scene.centerOnScreen();
     }
-
+    @FXML
+    protected void refresh() {
+        initialize();
+    }
     @FXML
     public void search() {
         // Get the search text
