@@ -3,7 +3,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.apcles.ModiferController">
    <children>
       <HBox prefHeight="65.0" prefWidth="600.0" />
       <HBox prefHeight="187.0" prefWidth="600.0">
@@ -26,16 +26,26 @@
             <VBox prefHeight="114.0" prefWidth="191.0">
                <children>
                   <Label text="Nom de la clef" />
-                  <TextField prefHeight="25.0" prefWidth="145.0" />
+                  <TextField fx:id="nom" prefHeight="25.0" prefWidth="145.0" />
                   <Label text="Couleur" />
-                  <ComboBox prefWidth="150.0" />
+                  <ComboBox fx:id="couleur" prefWidth="150.0" />
                </children>
             </VBox>
-            <Pane prefHeight="114.0" prefWidth="112.0" />
-            <VBox prefHeight="114.0" prefWidth="227.0">
+            <Pane prefHeight="114.0" prefWidth="21.0" />
+            <VBox prefHeight="114.0" prefWidth="168.0">
                <children>
                   <Label text="Qu'ouvre-t-elle ?" />
-                  <TextArea prefHeight="72.0" prefWidth="227.0" />
+                  <TextArea fx:id="ouvrir" prefHeight="72.0" prefWidth="57.0" />
+               </children>
+            </VBox>
+            <Pane prefHeight="114.0" prefWidth="64.0" />
+            <VBox prefHeight="200.0" prefWidth="100.0">
+               <children>
+                  <Pane prefHeight="84.0" prefWidth="100.0" />
+                  <Button fx:id="modifier" mnemonicParsing="false" prefHeight="25.0" prefWidth="103.0" text="Modifer" textAlignment="CENTER" />
+                  <Pane prefHeight="77.0" prefWidth="100.0" />
+                  <Button fx:id="annuler" alignment="TOP_CENTER" mnemonicParsing="false" onAction="#retour" prefHeight="25.0" prefWidth="109.0" text="Annuler" />
+                  <Pane prefHeight="91.0" prefWidth="100.0" />
                </children>
             </VBox>
          </children></HBox>
