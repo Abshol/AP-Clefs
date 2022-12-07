@@ -38,7 +38,14 @@ public class AjouterController implements Initializable {
             stmt.setString(1, nomClef.getText());
             ResultSet results = stmt.executeQuery();
             if (results.next()){
-                labelNom.setText("Nom de la clef Erreur: Le nom de la clef est déjà enregistré");
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Erreur !");
+
+                // Header Text: null
+                alert.setHeaderText(null);
+                alert.setContentText("Erreur: Le nom de la clef est déjà enregistré");
+
+                alert.showAndWait();
             }
             else {
                 sql = "INSERT INTO `clef`( `nom`, `ouvrir`, `nomCouleur`) VALUES (? , ?, ?)";
@@ -48,10 +55,26 @@ public class AjouterController implements Initializable {
                 stmt.setString(3, couleurClef.getValue().toString());
                 System.out.println(stmt);
                 stmt.executeUpdate();
-                annuler();
+
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Succès !");
+
+                // Header Text: null
+                alert.setHeaderText(null);
+                alert.setContentText("La clef a bien été créée !");
+
+                alert.showAndWait();
+
+                Parent root = FXMLLoader.load(Start.class.getResource("clefs.fxml"));
+                Stage scene = (Stage) annuler.getScene().getWindow();
+                scene.setTitle("Gestionnaire de Clefs");
+                scene.setScene(new Scene(root));
+                scene.centerOnScreen();
             }
         } catch (SQLException e){
             e.printStackTrace();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         }
     }
     @FXML
