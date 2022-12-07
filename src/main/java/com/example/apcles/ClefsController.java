@@ -59,11 +59,11 @@ public class ClefsController {
 
             TableColumn couleurCol = new TableColumn("Couleur");
             couleurCol.setCellValueFactory(new PropertyValueFactory("nomCouleur"));
-            couleurCol.setPrefWidth(6.666748046875);
+            couleurCol.setPrefWidth(150.33336639404297);
 
             TableColumn ouvrirCol = new TableColumn("Qu'est-ce qu'elle ouvre");
             ouvrirCol.setCellValueFactory(new PropertyValueFactory("ouvrir"));
-            ouvrirCol.setPrefWidth(0.33331298828125);
+            ouvrirCol.setPrefWidth(375);
 
             tableKey.setItems(items);
             tableKey.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
