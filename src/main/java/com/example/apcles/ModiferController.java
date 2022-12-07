@@ -44,6 +44,7 @@ public class ModiferController {
             stmt.setString(3, (String) couleur.getValue());
             stmt.setInt(4, tableKey.getSelectionModel().getSelectedItem().getId());
             stmt.execute();
+            retour();
         } catch (SQLException e){
             e.printStackTrace();
         }
