@@ -31,8 +31,8 @@ public class passwordHash {
             String sql = "INSERT INTO `comptes`(`nomUtilisateur`, `motDePasse`) VALUES (?,?)";
             PreparedStatement stmt = con.prepareStatement(sql);
             stmt.setString(1, username);
-            stmt.setString(2, password);
-            results = stmt.executeQuery();
+            stmt.setString(2, hash);
+            stmt.execute();
         } catch (SQLException e){
             e.printStackTrace();
         }
