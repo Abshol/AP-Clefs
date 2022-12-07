@@ -9,7 +9,7 @@
       <HBox prefHeight="187.0" prefWidth="600.0">
          <children>
             <Pane prefHeight="184.0" prefWidth="70.0" />
-            <TableView prefHeight="184.0" prefWidth="562.0">
+            <TableView fx:id="tableKey" prefHeight="184.0" prefWidth="562.0">
               <columns>
                 <TableColumn prefWidth="75.0" text="ID" />
                 <TableColumn prefWidth="76.33330535888672" text="Nom" />
