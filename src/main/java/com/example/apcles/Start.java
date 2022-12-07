@@ -4,8 +4,9 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-
+import Class.passwordHash;
 import java.io.IOException;
+import java.net.PasswordAuthentication;
 
 public class Start extends Application {
     @Override
@@ -15,6 +16,9 @@ public class Start extends Application {
         stage.setTitle("Connexion");
         stage.setScene(scene);
         stage.show();
+
+        passwordHash hash = new passwordHash();
+        hash.hash("motdepasse", "admin");
     }
 
     public static void main(String[] args) {

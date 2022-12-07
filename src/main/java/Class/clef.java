@@ -1,4 +1,4 @@
-package com.example.apcles;
+package Class;
 
 public class clef {
     private final int id;
