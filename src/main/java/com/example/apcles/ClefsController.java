@@ -22,7 +22,7 @@ public class ClefsController {
     @FXML
     private Button supprimer;
     @FXML
-    private TableView tableKey;
+    private TableView<clef> tableKey;
     @FXML
     private ObservableList<clef> items = FXCollections.observableArrayList();
     @FXML
@@ -98,4 +98,5 @@ public class ClefsController {
         scene.setScene(new Scene(root));
         scene.centerOnScreen();
     }
+
 }
