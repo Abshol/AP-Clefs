@@ -71,8 +71,6 @@ public class ClefsController {
         } catch (SQLException e){
             e.printStackTrace();
         }
-
-
     }
     @FXML
     protected void deconnexion() throws IOException {
@@ -104,7 +102,7 @@ public class ClefsController {
                     String sql = "DELETE FROM `clef` WHERE clef.id = ?";
                     PreparedStatement stmt = con.prepareStatement(sql);
                     stmt.setInt(1, tableKey.getSelectionModel().getSelectedItem().getId());
-                    ResultSet results = stmt.executeQuery();
+                    stmt.execute();
                 } catch (SQLException e) {
                     throw new RuntimeException(e);
                 }

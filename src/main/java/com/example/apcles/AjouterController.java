@@ -58,11 +58,9 @@ public class AjouterController implements Initializable {
 
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
                 alert.setTitle("Succès !");
-
                 // Header Text: null
                 alert.setHeaderText(null);
                 alert.setContentText("La clef a bien été créée !");
-
                 alert.showAndWait();
 
                 Parent root = FXMLLoader.load(Start.class.getResource("clefs.fxml"));
