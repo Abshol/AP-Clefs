@@ -7,6 +7,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import Class.clef;
 import java.io.IOException;
@@ -21,10 +22,9 @@ public class ClefsController {
     private Button ajouter;
     @FXML
     private Button supprimer;
+    private ObservableList<clef> items;
     @FXML
-    private TableView<clef> tableKey;
-    @FXML
-    private ObservableList<clef> items = FXCollections.observableArrayList();
+    private TableView<clef> tableKey = new TableView<clef>();
     @FXML
     private Button modifier;
     @FXML
@@ -34,22 +34,39 @@ public class ClefsController {
         try (Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/ap-clefs", "root", "")){
 
             ResultSet results;
-
+            items = FXCollections.observableArrayList();
             String sql = "SELECT * FROM clef";
             PreparedStatement stmt = con.prepareStatement(sql);
             results = stmt.executeQuery();
             while (results.next()){
+                //nom.setCellFactory(new PropertyValueFactory<>(results.getString(2)));
                 int id = results.getInt(1);
                 String nom = results.getString(2);
                 String ouvrir = results.getString(3);
                 String nomCouleur = results.getString(4);
                 clef clef = new clef(id, nom, ouvrir, nomCouleur);
-                items.add(clef);
+                items.addAll(clef);
             }
+            TableColumn nomCol = new TableColumn("Nom");
+            nomCol.setCellValueFactory(new PropertyValueFactory<>("nom"));
+            nomCol.setPrefWidth(150.33336639404297);
+
+            TableColumn couleurCol = new TableColumn("Couleur");
+            couleurCol.setCellValueFactory(new PropertyValueFactory("nomCouleur"));
+            couleurCol.setPrefWidth(6.666748046875);
+
+            TableColumn ouvrirCol = new TableColumn("Qu'est-ce qu'elle ouvre");
+            ouvrirCol.setCellValueFactory(new PropertyValueFactory("ouvrir"));
+            ouvrirCol.setPrefWidth(0.33331298828125);
+
+            tableKey.setItems(items);
+            tableKey.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
+            tableKey.getColumns().addAll(nomCol, couleurCol, ouvrirCol);
         } catch (SQLException e){
             e.printStackTrace();
         }
-        tableKey.setItems(items);
+
+
     }
     @FXML
     protected void deconnexion() throws IOException {
@@ -63,7 +80,7 @@ public class ClefsController {
     protected void goToAjouter() throws IOException {
         Parent root = FXMLLoader.load(Start.class.getResource("ajouter.fxml"));
         Stage scene = (Stage) ajouter.getScene().getWindow();
-        scene.setTitle("Ajouter une clé");
+        scene.setTitle("Ajouter une clef");
         scene.setScene(new Scene(root));
         scene.centerOnScreen();
     }
@@ -89,7 +106,6 @@ public class ClefsController {
             }
         });
     }
-
     @FXML
     protected void goToModifier() throws IOException {
         Parent root = FXMLLoader.load(Start.class.getResource("modifier.fxml"));

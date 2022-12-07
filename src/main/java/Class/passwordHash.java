@@ -17,7 +17,7 @@ public class passwordHash {
 
     /*
         Hashes a password put in parameters and sends it to the database
-         */
+     */
     public void hash(String password, String username) {
         // salt 32 bytes
         // Hash length 64 bytes
@@ -38,21 +38,9 @@ public class passwordHash {
         }
     }
     /*
-    returns a password's hash
-     */
-    public String getHash(String password) {
-        return argon2.hash(3, // Number of iterations
-                64 * 1024, // 64mb
-                1, // how many parallel threads to use
-                password);
-    }
-
-    /*
     returns if the two passwords are the same or not
      */
     public Boolean verify(String password, String hash) {
-        System.out.println(password);
-        System.out.println(hash);
         return argon2.verify(hash, password);
     }
 }
