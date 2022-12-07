@@ -2,6 +2,8 @@ package com.example.apcles;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -29,6 +31,10 @@ public class ClefsController {
     private Button modifier;
     @FXML
     private Button suprimer;
+    @FXML
+    private TextField searchBar;
+    @FXML
+    private Button searchButton;
     @FXML
     protected void initialize() {
         try (Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/ap-clefs", "root", "")){
@@ -113,6 +119,32 @@ public class ClefsController {
         scene.setTitle("Modifier une clé");
         scene.setScene(new Scene(root));
         scene.centerOnScreen();
+    }
+
+    @FXML
+    public void search() {
+        // Get the search text
+        String searchText = searchBar.getText().toLowerCase();
+
+        // Create a FilteredList that will be used to filter the TableView
+        FilteredList<clef> filteredList = new FilteredList<>(items, p -> true);
+
+        // Set the Predicate that will be used to filter the items in the TableView
+        filteredList.setPredicate(clef -> {
+            // Check if the search text matches the name, opening, or color of the key
+            return clef.getNom().toLowerCase().contains(searchText)
+                    || clef.getOuvrir().toLowerCase().contains(searchText)
+                    || clef.getNomCouleur().toLowerCase().contains(searchText);
+        });
+
+        // Create a SortedList that will be used to sort the TableView
+        SortedList<clef> sortedList = new SortedList<>(filteredList);
+
+        // Set the comparator that will be used to sort the items in the TableView
+        sortedList.comparatorProperty().bind(tableKey.comparatorProperty());
+
+        // Update the items in the TableView
+        tableKey.setItems(sortedList);
     }
 
 }
