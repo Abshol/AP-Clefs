@@ -92,7 +92,7 @@ public class ModiferController {
             stmt.setString(2, ouvrir.getText());
             stmt.setString(3, couleur.getValue().toString());
             stmt.setInt(4, tableKey.getSelectionModel().getSelectedItem().getId());
-            if (stmt.execute()) {
+            if (!stmt.execute()) {
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
                 alert.setTitle("Succès !");
                 // Header Text: null
@@ -106,7 +106,7 @@ public class ModiferController {
                 alert.setTitle("Erreur !");
                 // Header Text: null
                 alert.setHeaderText(null);
-                alert.setContentText("Une erreur est survenue lors de la création de la clef.");
+                alert.setContentText("Une erreur est survenue lors de la modification de la clef.");
                 alert.showAndWait();
             }
         } catch (SQLException e){

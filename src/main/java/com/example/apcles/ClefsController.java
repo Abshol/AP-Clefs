@@ -14,6 +14,7 @@ import javafx.stage.Stage;
 import Class.clef;
 import java.io.IOException;
 import java.sql.*;
+import java.util.Optional;
 
 public class ClefsController {
     @FXML
@@ -37,8 +38,8 @@ public class ClefsController {
     private TextField searchBar;
     @FXML
     private Button searchButton;
-    @FXML
-    protected void initialize() {
+
+    protected void insertData(boolean columnCreate) {
         try (Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/ap-clefs", "root", "")){
 
             ResultSet results;
@@ -55,24 +56,35 @@ public class ClefsController {
                 clef clef = new clef(id, nom, ouvrir, nomCouleur);
                 items.addAll(clef);
             }
-            TableColumn nomCol = new TableColumn("Nom");
-            nomCol.setCellValueFactory(new PropertyValueFactory<>("nom"));
-            nomCol.setPrefWidth(150.33336639404297);
+            if (columnCreate) {
+                TableColumn nomCol = new TableColumn("Nom");
+                nomCol.setCellValueFactory(new PropertyValueFactory<>("nom"));
+                nomCol.setPrefWidth(150.33336639404297);
 
-            TableColumn couleurCol = new TableColumn("Couleur");
-            couleurCol.setCellValueFactory(new PropertyValueFactory("nomCouleur"));
-            couleurCol.setPrefWidth(150.33336639404297);
+                TableColumn couleurCol = new TableColumn("Couleur");
+                couleurCol.setCellValueFactory(new PropertyValueFactory("nomCouleur"));
+                couleurCol.setPrefWidth(150.33336639404297);
 
-            TableColumn ouvrirCol = new TableColumn("Qu'est-ce qu'elle ouvre");
-            ouvrirCol.setCellValueFactory(new PropertyValueFactory("ouvrir"));
-            ouvrirCol.setPrefWidth(375);
+                TableColumn ouvrirCol = new TableColumn("Qu'est-ce qu'elle ouvre");
+                ouvrirCol.setCellValueFactory(new PropertyValueFactory("ouvrir"));
+                ouvrirCol.setPrefWidth(375);
+                tableKey.setItems(items);
+                tableKey.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
+                tableKey.getColumns().addAll(nomCol, couleurCol, ouvrirCol);
+            }
+            else {
+                tableKey.setItems(items);
+                tableKey.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
+            }
 
-            tableKey.setItems(items);
-            tableKey.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
-            tableKey.getColumns().addAll(nomCol, couleurCol, ouvrirCol);
+
         } catch (SQLException e){
             e.printStackTrace();
         }
+    }
+    @FXML
+    protected void initialize() {
+        insertData(true);
     }
     @FXML
     protected void deconnexion() throws IOException {
@@ -93,24 +105,27 @@ public class ClefsController {
     @FXML
     protected void supprimer() throws IOException {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        ((Button) alert.getDialogPane().lookupButton(ButtonType.OK)).setText("Oui");
+        ((Button) alert.getDialogPane().lookupButton(ButtonType.CANCEL)).setText("Non");
+
+
         alert.setTitle("Supprimer la clef");
         alert.setContentText("Êtes-vous sur ?");
-        ButtonType okButton = new ButtonType("Oui", ButtonBar.ButtonData.YES);
-        ButtonType noButton = new ButtonType("Non", ButtonBar.ButtonData.NO);
-        alert.getButtonTypes().setAll(okButton, noButton);
-        alert.showAndWait().ifPresent(type -> {
-            if (type == ButtonType.YES) {
-                try (Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/ap-clefs", "root", "")) {
-                    String sql = "DELETE FROM `clef` WHERE clef.id = ?";
-                    PreparedStatement stmt = con.prepareStatement(sql);
-                    stmt.setInt(1, tableKey.getSelectionModel().getSelectedItem().getId());
-                    stmt.execute();
-                } catch (SQLException e) {
-                    throw new RuntimeException(e);
-                }
+        System.out.println(alert.getButtonTypes());
 
+        Optional<ButtonType> result = alert.showAndWait();
+        if (result.get().equals(ButtonType.OK)) {
+            System.out.println("test");
+            try (Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/ap-clefs", "root", "")) {
+                String sql = "DELETE FROM `clef` WHERE clef.id = ?";
+                PreparedStatement stmt = con.prepareStatement(sql);
+                stmt.setInt(1, tableKey.getSelectionModel().getSelectedItem().getId());
+                stmt.execute();
+                refresh();
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
             }
-        });
+        }
     }
     @FXML
     protected void goToModifier() throws IOException {
@@ -122,7 +137,7 @@ public class ClefsController {
     }
     @FXML
     protected void refresh() {
-        initialize();
+        insertData(false);
     }
     @FXML
     public void search() {
