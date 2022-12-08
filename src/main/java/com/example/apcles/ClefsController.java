@@ -141,27 +141,20 @@ public class ClefsController {
     }
     @FXML
     public void search() {
-        // Get the search text
         String searchText = searchBar.getText().toLowerCase();
 
-        // Create a FilteredList that will be used to filter the TableView
         FilteredList<clef> filteredList = new FilteredList<>(items, p -> true);
 
-        // Set the Predicate that will be used to filter the items in the TableView
         filteredList.setPredicate(clef -> {
-            // Check if the search text matches the name, opening, or color of the key
             return clef.getNom().toLowerCase().contains(searchText)
                     || clef.getOuvrir().toLowerCase().contains(searchText)
                     || clef.getNomCouleur().toLowerCase().contains(searchText);
         });
 
-        // Create a SortedList that will be used to sort the TableView
         SortedList<clef> sortedList = new SortedList<>(filteredList);
 
-        // Set the comparator that will be used to sort the items in the TableView
         sortedList.comparatorProperty().bind(tableKey.comparatorProperty());
 
-        // Update the items in the TableView
         tableKey.setItems(sortedList);
     }
 
