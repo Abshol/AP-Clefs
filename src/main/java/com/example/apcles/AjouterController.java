@@ -48,11 +48,11 @@ public class AjouterController implements Initializable {
                 alert.showAndWait();
             }
             else {
-                sql = "INSERT INTO `clef`( `nom`, `ouvrir`, `nomCouleur`) VALUES (? , ?, ?)";
+                sql = "CALL `insert_key`(? , ?, ?)";
                 stmt = con.prepareStatement(sql);
                 stmt.setString(1, nomClef.getText());
-                stmt.setString(2, descClef.getText());
-                stmt.setString(3, couleurClef.getValue().toString());
+                stmt.setString(2, couleurClef.getValue().toString());
+                stmt.setString(3, descClef.getText());
                 System.out.println(stmt);
                 stmt.executeUpdate();
 

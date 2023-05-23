@@ -4,6 +4,7 @@ module com.example.apcles {
     requires java.sql;
     requires de.mkammerer.argon2.nolibs;
     requires com.sun.jna;
+    requires junit;
 
 
     opens com.example.apcles to javafx.fxml;
