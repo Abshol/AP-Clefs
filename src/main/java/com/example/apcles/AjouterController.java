@@ -53,7 +53,6 @@ public class AjouterController implements Initializable {
                 stmt.setString(1, nomClef.getText());
                 stmt.setString(2, couleurClef.getValue().toString());
                 stmt.setString(3, descClef.getText());
-                System.out.println(stmt);
                 stmt.executeUpdate();
 
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
